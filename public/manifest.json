@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "MCBBS Extender",
+    "version": "2.1.0",
+    "description": "优化, 美化MCBBS v2体验",
+  
+    "icons": {
+      "48": "icons/border-48.png"
+    },
+    "content_scripts": [
+      {
+        "run_at": "document_start",
+        "matches": ["https://*.mcbbs.net/*"],
+        "js": ["content_script.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": ["core.js"],
+        "matches": ["https://*.mcbbs.net/*"]
+      }
+    ]
+  }
