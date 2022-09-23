@@ -26,12 +26,14 @@ export const loadScript = async (src: string, runAt: RunAt = "document_body") =>
 		});
 	} else if (runAt == "document_idle") {
 		await new Promise(resolve => {
+			setTimeout(() => {
+				resolve(true);
+			}, 200);
 			document.addEventListener("load", () => {
 				resolve(true);
 			});
 		});
 	}
-
 	const s = document.createElement("script");
 	s.src = src;
 	s.onload = function () {
