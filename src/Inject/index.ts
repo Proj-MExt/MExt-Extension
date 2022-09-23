@@ -1,32 +1,32 @@
-import createCore from "./package/Core";
+import createCore from "../modules/Core";
 
-import AnimationGoToTop from "./package/AnimationGoToTop";
-import DisableAutoPlay from "./package/DisableAutoPlay";
-import FixCodeBlock from "./package/FixCodeBlock";
-import FixImgZoom from "./package/FixImgZoom";
-import FixTopBarPopMenu from "./package/FixTopBarPopMenu";
-import FixAnchor from "./package/FixAnchor";
-import HighlightThreads from "./package/HighlightThreads";
-import HoverableMedal from "./package/HoverableMedal";
-import MiscFix from "./package/MiscFix";
-import MyCSS from "./package/MyCSS";
-import MyLinks from "./package/MyLinks";
-import MyReportReason from "./package/MyReportReason";
-import PinnedTopBar from "./package/PinnerTopBar";
-import QueryMessage from "./package/QueryMessage";
-import QuickAt from "./package/QuickAt";
-import RememberEditorMode from "./package/RememberEditorMode";
-import RememberPage from "./package/RememberPage";
-import RemoveLinkWarn from "./package/RemoveLinkWarn";
-import ReplaceFlash from "./package/ReplaceFlash";
-import RestrictMedalLine from "./package/RestrictMedalLine";
-import UseIGInQuickReply from "./package/UseIGInQuickReply";
-import ViewWarns from "./package/ViewWarns";
+import AnimationGoToTop from "../modules/AnimationGoToTop";
+import DisableAutoPlay from "../modules/DisableAutoPlay";
+import FixCodeBlock from "../modules/FixCodeBlock";
+import FixImgZoom from "../modules/FixImgZoom";
+import FixTopBarPopMenu from "../modules/FixTopBarPopMenu";
+import FixAnchor from "../modules/FixAnchor";
+import HighlightThreads from "../modules/HighlightThreads";
+import HoverableMedal from "../modules/HoverableMedal";
+import MiscFix from "../modules/MiscFix";
+import MyCSS from "../modules/MyCSS";
+import MyLinks from "../modules/MyLinks";
+import MyReportReason from "../modules/MyReportReason";
+import PinnedTopBar from "../modules/PinnerTopBar";
+import QueryMessage from "../modules/QueryMessage";
+import QuickAt from "../modules/QuickAt";
+import RememberEditorMode from "../modules/RememberEditorMode";
+import RememberPage from "../modules/RememberPage";
+import RemoveLinkWarn from "../modules/RemoveLinkWarn";
+import ReplaceFlash from "../modules/ReplaceFlash";
+import RestrictMedalLine from "../modules/RestrictMedalLine";
+import UseIGInQuickReply from "../modules/UseIGInQuickReply";
+import ViewWarns from "../modules/ViewWarns";
 
 declare global {
 	interface Window {
 		jQuery?: JQueryStatic;
-		MExt?: import("./package/Core").MExtInst;
+		MExt?: import("../modules/Core").MExtInst;
 		MExtConfig?: Record<string, unknown>;
 		ajaxget: any;
 		ajaxpost: any;

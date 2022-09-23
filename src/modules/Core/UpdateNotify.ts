@@ -1,4 +1,4 @@
-import { MExtModule } from ".";
+import { MExtModule } from "./index";
 
 const UpdateList = [
 	"1. 迁移到浏览器拓展",
@@ -14,7 +14,7 @@ export default {
 		if (typeof MExt.ValueStorage.get("LastVersion") == "undefined") {
 			MExt.ValueStorage.set("LastVersion", MExt.versionCode);
 			showDialog(
-				'<b>欢迎使用MCBBS Extender</b>.<br>本脚本的设置按钮已经放进入了您的个人信息菜单里,如需调整设置请在个人信息菜单里查看.<br><a href="https://afdian.net/@Zapic" target="_blank" style="color: #E91E63;text-decoration: underline;">在爱发电赞助我!</a>',
+				'<b>欢迎使用MCBBS Extender</b>.<br>本插件的设置按钮已经放进入了您的个人信息菜单里,如需调整设置请在个人信息菜单里查看.<br><a href="https://afdian.net/@Zapic" target="_blank" style="color: #E91E63;text-decoration: underline;">在爱发电赞助我!</a>',
 				"right",
 				"欢迎",
 				() => {
