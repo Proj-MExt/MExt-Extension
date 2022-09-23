@@ -1,7 +1,7 @@
-import { initValueStorage, hookDiscuzAjax } from "./utils";
+import { initValueStorage, hookDiscuzAjax } from "../modules/Core/utils";
 
-import Settings from "./Settings";
-import UpdateNotify from "./UpdateNotify";
+import Settings from "../modules/Core/Settings";
+import UpdateNotify from "../modules/Core/UpdateNotify";
 
 export interface MExtInst {
 	ValueStorage: ReturnType<typeof initValueStorage>;
@@ -32,8 +32,8 @@ export interface MExtModuleConfig extends MExtModuleConfigDeclare {
 }
 
 export interface MExtModule {
-	core: (MExt: MExtInst) => unknown;
-	style?: string;
+	core?: (MExt: MExtInst) => unknown;
+	style?: string | ((MExt: MExtInst) => string);
 	config?: MExtModuleConfigDeclare[];
 	predicate?: (MExt: MExtInst) => boolean;
 }
@@ -71,6 +71,8 @@ export default ($: JQueryStatic | undefined, ShouldRun: boolean): MExtInst => {
 				// 加载模块CSS
 				if (typeof module.style == "string") {
 					appendStyle(module.style);
+				} else if (typeof module.style == "function") {
+					appendStyle(module.style(MExt));
 				}
 				// 运行模块Core
 				if (typeof module.core == "function") {

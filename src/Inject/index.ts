@@ -1,4 +1,4 @@
-import createCore from "../modules/Core";
+import createCore from "./Core";
 
 import AnimationGoToTop from "../modules/AnimationGoToTop";
 import DisableAutoPlay from "../modules/DisableAutoPlay";
@@ -26,7 +26,7 @@ import ViewWarns from "../modules/ViewWarns";
 declare global {
 	interface Window {
 		jQuery?: JQueryStatic;
-		MExt?: import("../modules/Core").MExtInst;
+		MExt?: import("./Core").MExtInst;
 		MExtConfig?: Record<string, unknown>;
 		ajaxget: any;
 		ajaxpost: any;

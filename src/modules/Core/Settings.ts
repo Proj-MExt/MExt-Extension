@@ -1,4 +1,4 @@
-import { MExtModule } from "./index";
+import { MExtModule } from "../../Inject/Core";
 
 const module: MExtModule = {
 	style: `.conf_contain {

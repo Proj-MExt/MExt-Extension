@@ -1,4 +1,4 @@
-import { MExtModule } from "../Core";
+import { MExtModule } from "../../Inject/Core";
 
 export default {
 	predicate: MExt => MExt.ValueStorage.get<string>("myLinks")!.length > 0,

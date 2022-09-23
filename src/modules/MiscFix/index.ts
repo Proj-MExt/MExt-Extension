@@ -1,4 +1,4 @@
-import { MExtModule } from "../Core";
+import { MExtModule } from "../../Inject/Core";
 interface MiscFixItem {
 	script?: () => unknown;
 	style?: string;

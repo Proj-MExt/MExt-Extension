@@ -1,4 +1,4 @@
-import { MExtModule } from "../Core";
+import { MExtModule } from "../../Inject/Core";
 
 const medalReflectImage =
 	"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAA3CAYAAACGnvPUAAAAAXNSR0IArs4c6QAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA1UlEQVRYw+3Qy6rBARRGcQcjl1zCG5AkkY48gUiEMHU/7/8GS/vUHoqif1/ZgzX/tVLAn0qpwAQmMIH5NsxECWM1gYMKxsoBUxWM1wKOKhgrD8xUMF47yUvPMFYBmKtgvA5wUsFYRWChgrF+gC5wVsB4JWCpgvFLvU9dehfjlYGVCsYv9YGLAsarAGsVjJUGBsBVAeNVgY0Kxi8NX7mUBMarAVsVjF/6fXQpaYxXB3YqGCsDjICbAsZrAHsVjJUFxiqY/wITmMAEJjCBCUxgAhOYb8PcAbo5rkGPsZmjAAAAAElFTkSuQmCC";
@@ -125,7 +125,7 @@ export default {
 						.children("img")
 						.each((b, n) => {
 							// 获得勋章ID
-							let id = "md" + /\_\d*$/.exec(n.id)![0];
+							let id = "md" + /_\d*$/.exec(n.id)![0];
 							// 重写勋章结构
 							$(v).append(
 								$(
