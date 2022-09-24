@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "vite build --mode content && vite build --mode inject"
+    "build": "vite build --mode content && vite build --mode popup && vite build --mode inject"
   },
   "dependencies": {
     "webextension-polyfill": "^0.10.0"
