@@ -1,10 +1,10 @@
-import { initValueStorage, hookDiscuzAjax } from "../modules/Core/utils";
-
+import { initValueStorage, hookDiscuzAjax } from "./utils";
+import MessageBridge from "../Utils/MessageBridge";
 import Settings from "../modules/Core/Settings";
 import UpdateNotify from "../modules/Core/UpdateNotify";
 
 export interface MExtInst {
-	ValueStorage: ReturnType<typeof initValueStorage>;
+	ValueStorage: Awaited<ReturnType<typeof initValueStorage>>;
 	use: (...module: MExtModule[]) => MExtInst;
 	debugLog: (message: string) => void;
 	versionName: string;
@@ -38,8 +38,8 @@ export interface MExtModule {
 	predicate?: (MExt: MExtInst) => boolean;
 }
 
-export default ($: JQueryStatic | undefined, ShouldRun: boolean): MExtInst => {
-	const ValueStorage = initValueStorage();
+export default async ($: JQueryStatic | undefined, bridge: MessageBridge, ShouldRun: boolean): Promise<MExtInst> => {
+	const ValueStorage = await initValueStorage(bridge);
 	const ConfigList: MExtModuleConfig[] = [];
 	// 导出模块
 	const exportModule = (...modules: MExtModule[]) => {

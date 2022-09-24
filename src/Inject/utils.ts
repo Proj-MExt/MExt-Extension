@@ -1,3 +1,5 @@
+import type MessageBridge from "../Utils/MessageBridge";
+
 const hookDiscuzAjax = ($: JQueryStatic) => {
 	// 钩住DiscuzAjax函数,使其触发全局事件
 	const __ajaxpost = window.ajaxpost;
@@ -33,8 +35,8 @@ const hookDiscuzAjax = ($: JQueryStatic) => {
 	};
 };
 
-const initValueStorage = () => {
-	const valueList = window.MExtConfig || {};
+const initValueStorage = async (bridge: MessageBridge) => {
+	const valueList: Record<string, any> = await bridge.sendCommand("storage_load");
 	const migrate = localStorage.getItem("MExt_config");
 	if (migrate) {
 		try {
@@ -43,12 +45,16 @@ const initValueStorage = () => {
 				Object.assign(valueList, preList);
 			}
 		} finally {
-			// localStorage.removeItem("MExt_Config");
+			localStorage.removeItem("MExt_config");
+			await bridge.sendCommand("storage_save", valueList);
 		}
 	}
+	bridge.onCommand("storage_update", data => {
+		Object.assign(valueList, data.data);
+	});
 	const setValue = <T>(name: string, val: T): void => {
 		valueList[name] = val;
-		localStorage.setItem("MExt_config", JSON.stringify(valueList));
+		bridge.sendCommand("storage_save", valueList);
 	};
 	const getValue = <T>(name: string): T | undefined => {
 		return valueList[name] as T;

@@ -1,4 +1,6 @@
 import createCore from "./Core";
+import createMsgChannel from "./MessageHost";
+import MessageBridge from "../Utils/MessageBridge";
 
 import AnimationGoToTop from "../modules/AnimationGoToTop";
 import DisableAutoPlay from "../modules/DisableAutoPlay";
@@ -23,17 +25,8 @@ import RestrictMedalLine from "../modules/RestrictMedalLine";
 import UseIGInQuickReply from "../modules/UseIGInQuickReply";
 import ViewWarns from "../modules/ViewWarns";
 
-declare global {
-	interface Window {
-		jQuery?: JQueryStatic;
-		MExt?: import("./Core").MExtInst;
-		MExtConfig?: Record<string, unknown>;
-		ajaxget: any;
-		ajaxpost: any;
-	}
-}
-
-(($?: JQueryStatic) => {
+(async ($?: JQueryStatic) => {
+	const bridge = new MessageBridge(createMsgChannel());
 	let ShouldRun = true;
 	//夹带私货
 	console.log(
@@ -64,7 +57,7 @@ declare global {
 			return;
 		}
 	}
-	const core = createCore($, ShouldRun);
+	const core = await createCore($, bridge, ShouldRun);
 	window.MExt = core;
 	core.use(
 		AnimationGoToTop,
