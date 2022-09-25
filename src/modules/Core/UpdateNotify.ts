@@ -1,4 +1,4 @@
-import { MExtModule } from "../../Inject/Core";
+import { MExtModule } from "../../inject/Core";
 
 const UpdateList = [
 	"1. 迁移到浏览器拓展",

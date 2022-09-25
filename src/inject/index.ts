@@ -1,6 +1,6 @@
 import createCore from "./Core";
 import createMsgChannel from "./MessageHost";
-import MessageBridge from "../Utils/MessageBridge";
+import MessageBridge from "../utils/MessageBridge";
 
 import AnimationGoToTop from "../modules/AnimationGoToTop";
 import DisableAutoPlay from "../modules/DisableAutoPlay";

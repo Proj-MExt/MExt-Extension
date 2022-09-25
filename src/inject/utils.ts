@@ -1,4 +1,4 @@
-import type MessageBridge from "../Utils/MessageBridge";
+import type MessageBridge from "../utils/MessageBridge";
 
 const hookDiscuzAjax = ($: JQueryStatic) => {
 	// 钩住DiscuzAjax函数,使其触发全局事件

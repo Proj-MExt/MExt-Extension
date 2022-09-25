@@ -1,5 +1,5 @@
 import { initValueStorage, hookDiscuzAjax } from "./utils";
-import MessageBridge from "../Utils/MessageBridge";
+import MessageBridge from "../utils/MessageBridge";
 import Settings from "../modules/Core/Settings";
 import UpdateNotify from "../modules/Core/UpdateNotify";
 

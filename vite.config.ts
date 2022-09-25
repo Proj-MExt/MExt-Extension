@@ -1,40 +1,62 @@
-import {defineConfig} from "vite";
+import { defineConfig, UserConfig } from "vite";
+import ViteRenamePlugin from "./plugins/ViteRename";
 
 export default defineConfig((env) => {
-	const stage = {
-		content: {
-			input: {
-				content_script: "src/Content/index.ts"
-			},
-			clean: true,
-			copy: false
-		},
-		popup: {
-			input: {},
-			clean: false,
-			copy: false
-		},
-		inject: {
-			input: {
-				inject: "src/Inject/index.ts"
-			},
-			clean: false,
-			copy: undefined
-		}
-	} as any;
-	const curr = stage[env.mode];
-	return {
-		publicDir: curr.copy,
-		build: {
-			emptyOutDir: curr.clean,
-			minify: false,
-			rollupOptions: {
-				input: curr.input,
-				output: {
-					entryFileNames: "[name].js",
-					format: "iife"
+	if (env.mode == "content") {
+		return {
+			publicDir: false,
+			build: {
+				emptyOutDir: true,
+				minify: false,
+				rollupOptions: {
+					input: {
+						"content-script": "src/content/index.ts"
+					},
+					output: {
+						entryFileNames: "[name].js",
+						format: "iife"
+					}
 				}
 			}
-		}
-	};
+		} as UserConfig;
+	} else if (env.mode == "popup") {
+		return {
+			plugins: [
+				ViteRenamePlugin({
+					"src/popup/index.html": "popup.html"
+				})
+			],
+			publicDir: false,
+			build: {
+				emptyOutDir: false,
+				minify: false,
+				rollupOptions: {
+					input: {
+						popup: "src/popup/index.html"
+					},
+					output: {
+						assetFileNames: "assets/popup/[name].[ext]",
+						entryFileNames: "assets/popup/[name].js"
+					}
+				}
+			}
+		} as UserConfig;
+	} else if (env.mode == "inject") {
+		return {
+			build: {
+				emptyOutDir: false,
+				minify: false,
+				rollupOptions: {
+					input: {
+						inject: "src/inject/index.ts"
+					},
+					output: {
+						entryFileNames: "[name].js",
+						format: "iife"
+					}
+				}
+			}
+		} as UserConfig;
+	}
+	throw Error("Unknown mode: " + env.mode);
 });

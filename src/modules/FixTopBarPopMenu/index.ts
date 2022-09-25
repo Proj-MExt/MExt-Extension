@@ -1,4 +1,4 @@
-import { MExtModule } from "../../Inject/Core";
+import { MExtModule } from "../../inject/Core";
 
 export default {
 	predicate: MExt => MExt.ValueStorage.get("fixTopBarPopMenu"),

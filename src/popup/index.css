@@ -1,0 +1,15 @@
+body {
+    width: 350px;
+    height: 500px;
+}
+
+.mdui-toolbar {
+    height: 42px;
+    line-height: 42px;
+}
+
+.scrolling-wrapper {
+    margin-top: 46px;
+    overflow: auto;
+    height: 500px;
+}

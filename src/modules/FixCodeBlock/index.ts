@@ -1,4 +1,4 @@
-import { MExtModule } from "../../Inject/Core";
+import { MExtModule } from "../../inject/Core";
 
 export default {
 	style: `pre:not([id]) code {

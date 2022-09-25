@@ -1,4 +1,4 @@
-import type MessageBridge from "src/Utils/MessageBridge";
+import type MessageBridge from "src/utils/MessageBridge";
 import { storage } from "webextension-polyfill";
 
 export default (msg: MessageBridge) => {
