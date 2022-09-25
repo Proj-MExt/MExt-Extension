@@ -36,7 +36,7 @@ const hookDiscuzAjax = ($: JQueryStatic) => {
 };
 
 const initValueStorage = async (bridge: MessageBridge) => {
-	const valueList: Record<string, any> = await bridge.sendCommand("storage_load");
+	const valueList: Record<string, any> = await bridge.sendCommand("storage_load", { key: "config" }) || {};
 	const migrate = localStorage.getItem("MExt_config");
 	if (migrate) {
 		try {
@@ -46,22 +46,22 @@ const initValueStorage = async (bridge: MessageBridge) => {
 			}
 		} finally {
 			localStorage.removeItem("MExt_config");
-			await bridge.sendCommand("storage_save", valueList);
+			await bridge.sendCommand("storage_save", { config: valueList });
 		}
 	}
-	bridge.onCommand("storage_update", data => {
-		Object.assign(valueList, data.data);
+	bridge.onCommand<{config: any}>("storage_update", data => {
+		Object.assign(valueList, data.data.config || {});
 	});
 	const setValue = <T>(name: string, val: T): void => {
 		valueList[name] = val;
-		bridge.sendCommand("storage_save", valueList);
+		bridge.sendCommand("storage_save", { config: valueList });
 	};
 	const getValue = <T>(name: string): T | undefined => {
 		return valueList[name] as T;
 	};
 	const deleteValue = (name: string): void => {
 		delete valueList[name];
-		localStorage.setItem("MExt_config", JSON.stringify(valueList));
+		bridge.sendCommand("storage_save", { config: valueList });
 	};
 	return {
 		get: getValue,
