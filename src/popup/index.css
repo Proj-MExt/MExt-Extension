@@ -13,3 +13,16 @@ body {
     overflow: auto;
     height: 500px;
 }
+
+.header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.mdui-btn.mini-button {
+    min-width: 24px;
+    height: 24px;
+    width: 24px;
+}

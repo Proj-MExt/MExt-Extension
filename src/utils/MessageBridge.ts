@@ -1,3 +1,6 @@
+import type { Runtime } from "webextension-polyfill";
+type Port = Runtime.Port;
+
 interface MessageObject<T> {
 	_id: number,
 	type: string,
@@ -11,24 +14,25 @@ interface MessageRespObject<T> {
 }
 
 export default class MessageBridge {
-	public readonly port: MessagePort;
+	public readonly port: MessagePort | Port;
 	private list = new Map<string, ((event: MessageRespObject<any>) => void)[]>();
 	private waiting = new Map<string, (event: any) => void>();
 
-	constructor(port: MessagePort) {
+	constructor(port: MessagePort | Port) {
 		this.port = port;
-		port.addEventListener("message", (e: MessageEvent<MessageObject<any>>) => {
-			const { type, data, _id } = e.data;
+		const addListener = port instanceof MessagePort ? (handler: any) => port.addEventListener("message", handler) : (handle: any) => port.onMessage.addListener(handle);
+		addListener((e: any) => {
+			const { type, data, _id } = (e instanceof MessageEvent ? e.data : e) as MessageObject<any>;
 			if (type == "response") {
 				const id = _id.toString();
-				this.waiting.get(id)?.(e.data as any);
+				this.waiting.get(id)?.(data);
 				this.waiting.delete(id);
 				return;
 			}
 			const list = this.list.get(type);
 			const resolve = (value: any) => {
 				port.postMessage({
-					_id: e.data._id,
+					_id,
 					type: "response",
 					data: value
 				});
@@ -43,7 +47,9 @@ export default class MessageBridge {
 				});
 			}
 		});
-		port.start();
+		if (port instanceof MessagePort) {
+			port.start();
+		}
 	}
 
 	public onCommand<T>(type: string, callback: (event: MessageRespObject<T>) => void) {
@@ -61,7 +67,7 @@ export default class MessageBridge {
 		});
 		return new Promise(resolve => {
 			this.waiting.set(_id.toString(), (data) => {
-				resolve(data.data);
+				resolve(data);
 			});
 		});
 	}

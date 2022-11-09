@@ -27,6 +27,9 @@ import ViewWarns from "../modules/ViewWarns";
 
 (async ($?: JQueryStatic) => {
 	const bridge = new MessageBridge(createMsgChannel());
+	bridge.onCommand("get_plugin_list", e => {
+		e.resolve(core.configList);
+	});
 	let ShouldRun = true;
 	//夹带私货
 	console.log(
@@ -43,7 +46,6 @@ import ViewWarns from "../modules/ViewWarns";
 		console.error(
 			"This page does NOT contain JQuery,MCBBS Extender will not work."
 		);
-		ShouldRun = false;
 		return;
 	}
 	//在手机页面主动禁用

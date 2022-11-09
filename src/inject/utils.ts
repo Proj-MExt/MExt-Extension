@@ -35,7 +35,12 @@ const hookDiscuzAjax = ($: JQueryStatic) => {
 	};
 };
 
-const initValueStorage = async (bridge: MessageBridge) => {
+export interface ValueStorage {
+	get<T>(name: string): T | undefined;
+	set<T>(name: string, val: T): void;
+	delete(name: string): void;
+}
+const initValueStorage = async (bridge: MessageBridge): Promise<ValueStorage> => {
 	const valueList: Record<string, any> = await bridge.sendCommand("storage_load", { key: "config" }) || {};
 	const migrate = localStorage.getItem("MExt_config");
 	if (migrate) {
