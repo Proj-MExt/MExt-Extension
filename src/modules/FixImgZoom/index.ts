@@ -58,7 +58,7 @@ export default {
 			clearTimeout(t);
 			// 显示缩放比例
 			$("#img_scale")
-				.html(img.scale * 100 + "%")
+				.html((img.scale * 100).toFixed(0) + "%")
 				.css("opacity", 1);
 			t = setTimeout(() => {
 				$("#img_scale").css("opacity", 0);
@@ -170,8 +170,8 @@ export default {
 							// 判断是否过小
 							if (
 								scroll < 0 &&
-								((img.width < 350 && img.radio < 1) ||
-									(img.width * img.radio < 350 && img.radio >= 1))
+								((img.width < 350 && img.radio < 1)
+									|| (img.width * img.radio < 350 && img.radio >= 1))
 							) {
 								// 回弹动画
 								dlg("Reach min size");
