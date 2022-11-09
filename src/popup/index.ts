@@ -14,10 +14,22 @@ import { initValueStorage } from "../inject/utils";
       return tab[0].id;
     }
   });
-  if (!TabID) return;
+  const waiter = setTimeout(() => {
+    mdui.dialog({
+      content: "无法连接到页面, 请打开MCBBS后再打开设置界面.",
+      title: "错误",
+      closeOnEsc: false,
+      history: false,
+      modal: true
+    })
+  }, 500);
+  if (!TabID) {
+    return;
+  }
   const port = tabs.connect(TabID, { name: "popup"});
   const bridge = new MessageBridge(port);
   const storage = await initValueStorage(bridge);
+  clearTimeout(waiter);
   const list = await bridge.sendCommand<MExtModuleConfig[], undefined>("get_plugin_list");
   await setThemeColor();
   createConfigList(list, storage);
