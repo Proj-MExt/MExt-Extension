@@ -118,13 +118,9 @@ export default {
 			$('#moderate a[title*="投票"]').parent().addClass("poll");
 			$('#moderate a[title*="悬赏"]').parent().addClass("newReply");
 			$("#moderate a.s.xst[style*=color]").each((i, v: any) => {
-				v.parentNode.previousElementSibling.style.setProperty(
-					"background-color",
-					v.style.color.replace(")", ",0.4)").replace("rgb(", "rgba("),
-					"important"
-				);
-				v.parentNode.previousElementSibling.style.borderLeftColor =
-					v.style.color;
+				const style = v.parentNode.parentNode.querySelector(".icn").style;
+				style.setProperty("background-color", v.style.color.replace(")", ",0.4)").replace("rgb(", "rgba("), "important");
+				style.borderLeftColor = v.style.color;
 			});
 			dlg("Thread list highlighting done.");
 		};
