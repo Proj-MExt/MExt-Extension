@@ -1,10 +1,8 @@
 import { MExtModule } from "../../inject/Core";
 
 const UpdateList = [
-	"1. 修复 帖子类型高亮的一个小问题",
-	"2. 优化 优化图像缩放 显示放大倍数的精度",
-	"3. 新增 插件弹出设置界面",
-	'4. 孩子没有钱了, 赏口饭吃吧! -> <a href="https://afdian.net/@Zapic" target="_blank" style="color: #369;text-decoration: underline;">爱发电赞助</a>'
+	"1. 新增 快捷切换用户组功能",
+	'2. 孩子没有钱了, 赏口饭吃吧! -> <a href="https://afdian.net/@Zapic" target="_blank" style="color: #369;text-decoration: underline;">爱发电赞助</a>'
 ];
 
 export default {

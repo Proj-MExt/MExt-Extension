@@ -14,6 +14,7 @@ export interface MExtInst {
 	Utils: {
 		appendStyle: (style: string) => void;
 		getRequest: (name: string, url?: string) => string | undefined;
+		sleep: (ms: number) => Promise<void>
 	};
 }
 
@@ -105,7 +106,7 @@ export default async ($: JQueryStatic | undefined, bridge: MessageBridge, Should
 			})
 			?.split("=")[1];
 	};
-
+	const sleep = (ms: number) => new Promise<void>((resolve) => setTimeout(() => resolve(), ms));
 	if ($) {
 		hookDiscuzAjax($);
 	}
@@ -118,8 +119,9 @@ export default async ($: JQueryStatic | undefined, bridge: MessageBridge, Should
 		jQuery: $,
 		configList: ConfigList,
 		Utils: {
-			appendStyle: appendStyle,
-			getRequest: getRequest
+			appendStyle,
+			getRequest,
+			sleep
 		}
 	};
 	exportModule(Settings, UpdateNotify);

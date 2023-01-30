@@ -17,6 +17,7 @@ import MyReportReason from "../modules/MyReportReason";
 import PinnedTopBar from "../modules/PinnerTopBar";
 import QueryMessage from "../modules/QueryMessage";
 import QuickAt from "../modules/QuickAt";
+import QuickSwitchGroup from "../modules/QuickSwitchGroup";
 import RememberEditorMode from "../modules/RememberEditorMode";
 import RememberPage from "../modules/RememberPage";
 import RemoveLinkWarn from "../modules/RemoveLinkWarn";
@@ -77,6 +78,7 @@ import ViewWarns from "../modules/ViewWarns";
 		PinnedTopBar,
 		QueryMessage,
 		QuickAt,
+		QuickSwitchGroup,
 		RememberEditorMode,
 		RememberPage,
 		RemoveLinkWarn,
